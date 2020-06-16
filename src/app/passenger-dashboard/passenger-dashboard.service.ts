@@ -6,16 +6,16 @@ import { map } from 'rxjs/operators';
 
 import { Passenger } from './models/passenger.interface';
 
-const PASSENGER_API: string = '/api/passenger.interface';
+const PASSENGER_API: string = '/assets/passenger.json';
 
 @Injectable()
 export class PassengerDashboardService {
     constructor(private http: HttpClient) {}
 
     getPassengers(): Observable<Passenger[]> {
-        this.http
+       return this.http
         .get(PASSENGER_API)
-        .pipe(map((response: Response) => response.json()));   
+        .pipe(map((res: Passenger[]) => res));   
     }
 
 }
