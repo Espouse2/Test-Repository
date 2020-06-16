@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 import { Passenger } from './models/passenger.interface';
 
-const PASSENGER_API: string = '/assets/passenger.json';
+const PASSENGER_API: string = '/api/passengers';
 
 @Injectable()
 export class PassengerDashboardService {
@@ -18,4 +18,15 @@ export class PassengerDashboardService {
         .pipe(map((res: Passenger[]) => res));   
     }
 
+    updatePassenger(passenger: Passenger): Observable<Passenger> {
+        return this.http
+         .put(`{PASSENGER_API}/${passenger.id}`, passenger)
+         .pipe(map((res: Passenger) => res));   
+     }
+
+     removePassenger(passenger: Passenger): Observable<Passenger> {
+        return this.http
+         .delete(`{PASSENGER_API}/${passenger.id}`)
+         .pipe(map((res: Passenger) => res));   
+     }
 }
